@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,5 @@ Route::get('/', function () {
 */
 
 Route::get("/", [HomeController::class, "index"])->name("home");
+Route::get("/contacto", [ContactoController::class, "index"])->name("contact");
+Route::post("/contacto", [ContactoController::class, "sendMessage"])->name("enviar");
