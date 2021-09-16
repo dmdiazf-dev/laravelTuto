@@ -53,7 +53,7 @@
             </div>
             <div class="col-4">
                 <label for="txtEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="{{ old('txtEmail') }}" aria-describedby="errEmail">
+                <input type="text" class="form-control" id="txtEmail" name="txtEmail" value="{{ old('txtEmail') }}" aria-describedby="errEmail">
                 <div id="errEmail" class="form-text text-danger">{{ $errors->first('txtEmail') }}</div>
             </div>
         </div>

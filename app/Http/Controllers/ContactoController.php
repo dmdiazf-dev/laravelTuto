@@ -22,6 +22,16 @@ class ContactoController extends Controller {
             'txtEmail' => 'required|email',
             'txtAsunto' => 'required',
             'txtMensaje' => 'required|min:5'
+        ],
+        [   'txtNombres.required' => 'El campo Nombres es obligatorio.',
+            'txtApellidos.required' => 'El campo Apellidos es obligatorio',
+            'txtDireccion.required' => 'El campo Dirección es obligatorio',
+            'txtTelefono.required' => 'El campo Teléfono es obligatorio',
+            'txtEmail.required' => 'El campo Email es obligatorio',
+            'txtEmail.email' => 'Email no es un correo válido',
+            'txtAsunto.required' => 'El campo Asunto es obligatorio',
+            'txtMensaje.required' => 'El campo Mensaje es obligatorio',
+            'txtMensaje.min' => 'Mensaje debe contener al menos 5 caracteres.'
         ]);
 
         $contact = new Contacto();
@@ -34,8 +44,6 @@ class ContactoController extends Controller {
         $contact->mensaje = $request->txtMensaje;
         $contact->save();
         return redirect("/");
-
-
 
     }
 
