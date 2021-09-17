@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactoMessage;
 use Illuminate\Http\Request;
-
 use App\Models\Contacto;
+use Illuminate\Support\Facades\Mail;
+
 
 class ContactoController extends Controller {
 
@@ -14,7 +16,8 @@ class ContactoController extends Controller {
 
     public function sendMessage(Request $request) {
 
-        request()->validate([
+        //Validar los datos del formulario y configurar los mensajes en español
+        $msg = request()->validate([
             'txtNombres' => 'required',
             'txtApellidos' => 'required',
             'txtDireccion' => 'required',
@@ -34,6 +37,10 @@ class ContactoController extends Controller {
             'txtMensaje.min' => 'Mensaje debe contener al menos 5 caracteres.'
         ]);
 
+        //Enviar los datos del formulario por email
+        Mail::to("dandiazfo@gmail.com")->queue(new ContactoMessage($msg));
+
+        //Almacenar el registro del contacto en la base de datos (Tabla: contactos)
         $contact = new Contacto();
         $contact->nombres = $request->txtNombres;
         $contact->apellidos = $request->txtApellidos;
@@ -43,7 +50,9 @@ class ContactoController extends Controller {
         $contact->asunto = $request->txtAsunto;
         $contact->mensaje = $request->txtMensaje;
         $contact->save();
-        return redirect("/");
+
+        return new ContactoMessage($msg); //Mostrar el resultado del email en la pantalla
+        //return redirect("/");           //Redireccionar al home nuevamente
 
     }
 

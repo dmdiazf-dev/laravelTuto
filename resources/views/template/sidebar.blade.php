@@ -8,6 +8,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{ route('upload') }}">
+            <span data-feather="upload"></span>
+            Upload
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#">
             <span data-feather="file"></span>
             Orders
